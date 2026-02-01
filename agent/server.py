@@ -33,16 +33,6 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# PLIVO_AUTH_ID = "85378585533982008"
-# PLIVO_AUTH_TOKEN = os.environ["PLIVO_AUTH_TOKEN"]
-
-# client = plivo.RestClient(PLIVO_AUTH_ID, PLIVO_AUTH_TOKEN)
-
-#TODO 
-# implement whatsapp messages forward 
-# readme 
-
- 
 
 
 class History_Summarizer(BaseModel):

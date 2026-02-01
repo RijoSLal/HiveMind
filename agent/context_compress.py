@@ -1,6 +1,6 @@
 from openai import OpenAI
 import os 
-import ryml # type: ignore
+import ryml
 from typing import Union
 import logging_setup
 import logging
