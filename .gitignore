@@ -1,0 +1,22 @@
+# local env / artifacts
+__pycache__/
+*.pyc
+*.log
+*.tmp
+*.bak
+*.swp
+
+# secrets & cookies
+*.txt
+*cookies*.txt
+
+# browser artifacts
+chrome-profile/
+*.png
+*.html
+
+# data uploads
+app/data/
+
+# venv
+.venv/
