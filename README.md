@@ -105,3 +105,41 @@ Env vars:
 
 ## Cloudscraper (optional)
 Set `USE_CLOUDSCRAPER=1` to attempt Cloudflare-friendly HTTP fetches before falling back to Playwright.
+
+## Hotelzify official pricing
+Set `HOTELZIFY_API_BASE` (and optional `HOTELZIFY_API_KEY`) to fetch official Sterling prices for comparison.
+The service calls `POST {HOTELZIFY_API_BASE}/rates` with:
+
+```json
+{
+  "property_name": "...",
+  "check_in": "YYYY-MM-DD",
+  "check_out": "YYYY-MM-DD",
+  "room_name": "...",
+  "meal_plan": "...",
+  "adults": 2,
+  "children": 0,
+  "currency": "INR"
+}
+```
+
+Expected response:
+```json
+{
+  "property_name": "...",
+  "room_name": "...",
+  "meal_plan": "...",
+  "currency": "INR",
+  "base_price": 12400,
+  "taxes": 1786,
+  "fees": 0,
+  "total_price": 14186
+}
+```
+
+## Comparison logic
+If an official price is available, the agent compares:
+- Official total vs OTA total (or OCR total if OTA missing)
+- Same currency required
+
+Agent response will explicitly state whether OTA is lower, equal, or higher than official.

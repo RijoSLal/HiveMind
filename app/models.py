@@ -50,6 +50,8 @@ class DisputeResponse(BaseModel):
     parsed_fees: Optional[float] = None
     parsed_total_price: Optional[float] = None
     errors: Optional[list[str]] = None
+    official_total_price: Optional[float] = None
+    official_currency: Optional[str] = None
 
 class ReviewDecision(BaseModel):
     status: Literal["approved", "rejected"]
