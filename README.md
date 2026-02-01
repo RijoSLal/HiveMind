@@ -85,6 +85,55 @@ result = run_verification(req, image_bytes=None)
 print(result.decision, result.message)
 ```
 
+### Function signature + I/O
+**Function:** `run_verification(req, image_bytes=None, filename="upload.jpg")`
+
+**Input (DisputeRequest):**
+```json
+{
+  "property_name": "Sterling Varca Goa",
+  "check_in": "2026-04-04",
+  "check_out": "2026-04-05",
+  "room_name": "Classic Room",
+  "meal_plan": "Room only",
+  "occupancy": 2,
+  "children": 1,
+  "currency": "INR",
+  "claimed_price": 11706,
+  "ota": "mmt",
+  "evidence_url": null
+}
+```
+
+**Output (AgentResponse):**
+```json
+{
+  "dispute_id": "inline",
+  "decision": "verified_lower_price",
+  "message": "I verified the OTA price is lower than our official rate. OTA: 11706 INR, Official: 14186 INR.",
+  "data": {
+    "dispute_id": "inline",
+    "status": "verified",
+    "ota_quote": {
+      "ota": "mmt",
+      "property_name": "Sterling Varca Goa",
+      "room_name": "Classic Room",
+      "meal_plan": "Room only",
+      "occupancy": 2,
+      "currency": "INR",
+      "price": 11706,
+      "base_price": 9920,
+      "taxes": 1786,
+      "fees": null,
+      "total_price": 11706
+    },
+    "official_total_price": 14186,
+    "official_currency": "INR",
+    "errors": []
+  }
+}
+```
+
 ## Notes
 - GHA and OTA providers are stubs; integrate official APIs/feeds or approved scraping inside `app/ota/*`.
 - Provider chain is defined in `app/verify.py` (GHA first, then requested OTA).
