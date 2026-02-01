@@ -1,4 +1,4 @@
-# Hotelzify Dispute Service
+# Hotelzify Dispute Service (Scraper Module)
 
 FastAPI service to intake price-dispute requests (with optional images), run OCR via Google Vision, and validate against OTA quotes.
 
@@ -15,16 +15,21 @@ FastAPI service to intake price-dispute requests (with optional images), run OCR
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+pip install -r scraper\requirements.txt
 $env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\service-account.json"
 $env:USE_MOCK_OTA="1"
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --app-dir scraper
 ```
 
 ## Quick start (Docker)
 ```powershell
-docker build -t hotelzify-disputes .
-docker run -p 8000:8000 -e GOOGLE_APPLICATION_CREDENTIALS=/creds/sa.json -e USE_MOCK_OTA=1 -v C:\path\to\sa.json:/creds/sa.json hotelzify-disputes
+docker build -f scraper/Dockerfile -t hotelzify-disputes scraper
+
+docker run -p 8000:8000 \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/creds/sa.json \
+  -e USE_MOCK_OTA=1 \
+  -v C:\path\to\sa.json:/creds/sa.json \
+  hotelzify-disputes
 ```
 
 ## API
@@ -56,7 +61,7 @@ Agent request (JSON):
 ```powershell
 curl -X POST http://localhost:8000/agent/price-check `
   -H "Content-Type: application/json" `
-  -d '{\"property_name\":\"Sterling Kodai Lake\",\"check_in\":\"2026-04-01\",\"check_out\":\"2026-04-03\",\"room_name\":\"Deluxe\",\"meal_plan\":\"Breakfast\",\"occupancy\":2,\"children\":0,\"currency\":\"INR\",\"claimed_price\":5499,\"ota\":\"mmt\",\"evidence_url\":\"https://www.makemytrip.com/...\"}'
+  -d '{"property_name":"Sterling Kodai Lake","check_in":"2026-04-01","check_out":"2026-04-03","room_name":"Deluxe","meal_plan":"Breakfast","occupancy":2,"children":0,"currency":"INR","claimed_price":5499,"ota":"mmt","evidence_url":"https://www.makemytrip.com/..."}'
 ```
 
 ## Python helper (scraper + OCR)

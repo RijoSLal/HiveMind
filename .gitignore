@@ -7,7 +7,6 @@ __pycache__/
 *.swp
 
 # secrets & cookies
-*.txt
 *cookies*.txt
 
 # browser artifacts
@@ -16,7 +15,7 @@ chrome-profile/
 *.html
 
 # data uploads
-app/data/
+scraper/app/data/
 
 # venv
 .venv/

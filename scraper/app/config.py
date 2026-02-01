@@ -16,5 +16,7 @@ class Settings(BaseModel):
     scrape_cookies_txt: str | None = os.getenv("SCRAPE_COOKIES_TXT")
     use_cloudscraper: bool = os.getenv("USE_CLOUDSCRAPER", "0") == "1"
     serpapi_api_key: str | None = os.getenv("SERPAPI_API_KEY")
+    hotelzify_api_base: str | None = os.getenv("HOTELZIFY_API_BASE")
+    hotelzify_api_key: str | None = os.getenv("HOTELZIFY_API_KEY")
 
 settings = Settings()
