@@ -1,0 +1,14 @@
+prompt: |
+    Summarize the conversation between the user and assistant into a clear, structured summary for another LLM. Capture only essential information needed to continue the task effectively. Include:
+
+    User goals and requests
+
+      - Key facts, constraints, and preferences
+
+      - Decisions made
+
+      - Important context or assumptions
+
+      - Open questions or pending tasks
+
+    Exclude small talk, repetition, and irrelevant details. Keep the summary brief, factual, and neutral. Write in plain text using short bullet points or short paragraphs.

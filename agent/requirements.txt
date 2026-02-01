@@ -1,0 +1,7 @@
+rapidyaml
+openai
+fastapi
+uvicorn
+python-dotenv
+plivo
+python-multipart
