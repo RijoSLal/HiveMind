@@ -59,6 +59,32 @@ curl -X POST http://localhost:8000/agent/price-check `
   -d '{\"property_name\":\"Sterling Kodai Lake\",\"check_in\":\"2026-04-01\",\"check_out\":\"2026-04-03\",\"room_name\":\"Deluxe\",\"meal_plan\":\"Breakfast\",\"occupancy\":2,\"children\":0,\"currency\":\"INR\",\"claimed_price\":5499,\"ota\":\"mmt\",\"evidence_url\":\"https://www.makemytrip.com/...\"}'
 ```
 
+## Python helper (scraper + OCR)
+Use `run_verification()` to execute OCR (if image provided) and scraping in one call.
+
+```python
+from app.agent import run_verification
+from app.models import DisputeRequest
+from datetime import date
+
+req = DisputeRequest(
+    property_name="Sterling Varca Goa",
+    check_in=date(2026, 4, 1),
+    check_out=date(2026, 4, 3),
+    room_name="Classic Room",
+    meal_plan="Breakfast",
+    occupancy=2,
+    children=1,
+    currency="INR",
+    claimed_price=8500,
+    ota="agoda",
+)
+
+# Optional: image_bytes from user screenshot
+result = run_verification(req, image_bytes=None)
+print(result.decision, result.message)
+```
+
 ## Notes
 - GHA and OTA providers are stubs; integrate official APIs/feeds or approved scraping inside `app/ota/*`.
 - Provider chain is defined in `app/verify.py` (GHA first, then requested OTA).
